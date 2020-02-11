@@ -1,0 +1,34 @@
+import { IConfigurationServiceContract, TranslationServiceAbstractProvider, LocalStoreManagerServiceAbstractProvider, ThemeManagerAbstractProvider } from '@polpware/ngx-appkit-contracts-alpha';
+export declare class ConfigurationService implements IConfigurationServiceContract {
+    private localStorage;
+    private translationService;
+    private themeManager;
+    constructor(localStoreManagerProvider: LocalStoreManagerServiceAbstractProvider, translationServiceProvider: TranslationServiceAbstractProvider, themeManagerProvider: ThemeManagerAbstractProvider);
+    language: string;
+    themeId: number;
+    homeUrl: string;
+    showDashboardStatistics: boolean;
+    showDashboardNotifications: boolean;
+    showDashboardTodo: boolean;
+    showDashboardBanner: boolean;
+    baseUrl: any;
+    tokenUrl: any;
+    loginUrl: string;
+    fallbackBaseUrl: string;
+    private _language;
+    private _homeUrl;
+    private _themeId;
+    private _showDashboardStatistics;
+    private _showDashboardNotifications;
+    private _showDashboardTodo;
+    private _showDashboardBanner;
+    private onConfigurationImported;
+    configurationImported$: import("rxjs").Observable<boolean>;
+    private loadLocalChanges;
+    private saveToLocalStore;
+    import(jsonValue: string): void;
+    export(changesOnly?: boolean): string;
+    clearLocalChanges(): void;
+    private resetLanguage;
+    private resetTheme;
+}

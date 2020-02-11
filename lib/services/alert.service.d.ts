@@ -1,0 +1,32 @@
+import { HttpResponseBase } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IAlertServiceContract, AlertCommand, AlertDialog, DialogType, MessageSeverity } from '@polpware/ngx-appkit-contracts-alpha';
+export declare class AlertService implements IAlertServiceContract {
+    private messages;
+    private dialogs;
+    private loadingMessageTimeoutId;
+    showDialog(message: string): any;
+    showDialog(message: string, type: DialogType, okCallback: (val?: any) => any): any;
+    showDialog(message: string, type: DialogType, okCallback?: (val?: any) => any, cancelCallback?: () => any, okLabel?: string, cancelLabel?: string, defaultValue?: string): any;
+    showMessage(summary: string): any;
+    showMessage(summary: string, detail: string, severity: MessageSeverity): any;
+    showMessage(summaryAndDetails: string[], summaryAndDetailsSeparator: string, severity: MessageSeverity): any;
+    showMessage(response: HttpResponseBase, ignoreValue_useNull: string, severity: MessageSeverity): any;
+    showStickyMessage(summary: string): any;
+    showStickyMessage(summary: string, detail: string, severity: MessageSeverity, error?: any): any;
+    showStickyMessage(summary: string, detail: string, severity: MessageSeverity, error?: any, onRemove?: () => any): any;
+    showStickyMessage(summaryAndDetails: string[], summaryAndDetailsSeparator: string, severity: MessageSeverity): any;
+    showStickyMessage(response: HttpResponseBase, ignoreValue_useNull: string, severity: MessageSeverity): any;
+    private showMessageHelper;
+    resetStickyMessage(): void;
+    startLoadingMessage(message?: string, caption?: string): void;
+    stopLoadingMessage(): void;
+    logDebug(msg: any): void;
+    logError(msg: any): void;
+    logInfo(msg: any): void;
+    logMessage(msg: any): void;
+    logTrace(msg: any): void;
+    logWarning(msg: any): void;
+    getDialogEvent(): Observable<AlertDialog>;
+    getMessageEvent(): Observable<AlertCommand>;
+}

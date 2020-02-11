@@ -1,0 +1,23 @@
+{
+  "name": "@polpware/ngx-appkit-services-alpha",
+  "version": "8.0.0",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@ngx-translate/core": "^11.0.1",
+    "@polpware/ngx-appkit-contracts-alpha": "^8.0.0"
+  },
+  "main": "bundles/polpware-ngx-appkit-services-alpha.umd.js",
+  "module": "fesm5/polpware-ngx-appkit-services-alpha.js",
+  "es2015": "fesm2015/polpware-ngx-appkit-services-alpha.js",
+  "esm5": "esm5/polpware-ngx-appkit-services-alpha.js",
+  "esm2015": "esm2015/polpware-ngx-appkit-services-alpha.js",
+  "fesm5": "fesm5/polpware-ngx-appkit-services-alpha.js",
+  "fesm2015": "fesm2015/polpware-ngx-appkit-services-alpha.js",
+  "typings": "polpware-ngx-appkit-services-alpha.d.ts",
+  "metadata": "polpware-ngx-appkit-services-alpha.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
