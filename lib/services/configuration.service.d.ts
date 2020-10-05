@@ -1,16 +1,24 @@
 import { IConfigurationServiceContract, TranslationServiceAbstractProvider, LocalStoreManagerServiceAbstractProvider, ThemeManagerAbstractProvider } from '@polpware/ngx-appkit-contracts-alpha';
+import * as i0 from "@angular/core";
 export declare class ConfigurationService implements IConfigurationServiceContract {
     private localStorage;
     private translationService;
     private themeManager;
     constructor(localStoreManagerProvider: LocalStoreManagerServiceAbstractProvider, translationServiceProvider: TranslationServiceAbstractProvider, themeManagerProvider: ThemeManagerAbstractProvider);
-    language: string;
-    themeId: number;
-    homeUrl: string;
-    showDashboardStatistics: boolean;
-    showDashboardNotifications: boolean;
-    showDashboardTodo: boolean;
-    showDashboardBanner: boolean;
+    set language(value: string);
+    get language(): string;
+    set themeId(value: number);
+    get themeId(): number;
+    set homeUrl(value: string);
+    get homeUrl(): string;
+    set showDashboardStatistics(value: boolean);
+    get showDashboardStatistics(): boolean;
+    set showDashboardNotifications(value: boolean);
+    get showDashboardNotifications(): boolean;
+    set showDashboardTodo(value: boolean);
+    get showDashboardTodo(): boolean;
+    set showDashboardBanner(value: boolean);
+    get showDashboardBanner(): boolean;
     baseUrl: any;
     tokenUrl: any;
     loginUrl: string;
@@ -31,4 +39,6 @@ export declare class ConfigurationService implements IConfigurationServiceContra
     clearLocalChanges(): void;
     private resetLanguage;
     private resetTheme;
+    static ɵfac: i0.ɵɵFactoryDef<ConfigurationService, never>;
+    static ɵprov: i0.ɵɵInjectableDef<ConfigurationService>;
 }

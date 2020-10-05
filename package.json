@@ -1,11 +1,11 @@
 {
   "name": "@polpware/ngx-appkit-services-alpha",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "@ngx-translate/core": "^11.0.1",
-    "@polpware/ngx-appkit-contracts-alpha": "^8.0.0"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@ngx-translate/core": "^12.0.0",
+    "@polpware/ngx-appkit-contracts-alpha": "^9.0.0"
   },
   "main": "bundles/polpware-ngx-appkit-services-alpha.umd.js",
   "module": "fesm5/polpware-ngx-appkit-services-alpha.js",
@@ -15,9 +15,11 @@
   "fesm5": "fesm5/polpware-ngx-appkit-services-alpha.js",
   "fesm2015": "fesm2015/polpware-ngx-appkit-services-alpha.js",
   "typings": "polpware-ngx-appkit-services-alpha.d.ts",
-  "metadata": "polpware-ngx-appkit-services-alpha.metadata.json",
   "sideEffects": false,
   "dependencies": {
-    "tslib": "^1.9.0"
+    "tslib": "^1.10.0"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
   }
 }

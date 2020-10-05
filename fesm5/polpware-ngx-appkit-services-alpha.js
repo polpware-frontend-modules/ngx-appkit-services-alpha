@@ -1,59 +1,22 @@
 import { __values } from 'tslib';
-import { Injectable, NgModule } from '@angular/core';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵinject, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule } from '@angular/core';
 import { HttpResponseBase } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { DialogType, MessageSeverity, Utilities, environment, ConfigurationServiceConstants, DBkeys, LocalStoreManagerServiceAbstractProvider, TranslationServiceAbstractProvider, ThemeManagerAbstractProvider, StorageManagerConstants } from '@polpware/ngx-appkit-contracts-alpha';
 import { TranslateService } from '@ngx-translate/core';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/services/alert.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var AlertService = /** @class */ (function () {
     function AlertService() {
         this.messages = new Subject();
         this.dialogs = new Subject();
     }
-    /**
-     * @param {?} message
-     * @param {?=} type
-     * @param {?=} okCallback
-     * @param {?=} cancelCallback
-     * @param {?=} okLabel
-     * @param {?=} cancelLabel
-     * @param {?=} defaultValue
-     * @return {?}
-     */
-    AlertService.prototype.showDialog = /**
-     * @param {?} message
-     * @param {?=} type
-     * @param {?=} okCallback
-     * @param {?=} cancelCallback
-     * @param {?=} okLabel
-     * @param {?=} cancelLabel
-     * @param {?=} defaultValue
-     * @return {?}
-     */
-    function (message, type, okCallback, cancelCallback, okLabel, cancelLabel, defaultValue) {
+    AlertService.prototype.showDialog = function (message, type, okCallback, cancelCallback, okLabel, cancelLabel, defaultValue) {
         if (!type) {
             type = DialogType.alert;
         }
         this.dialogs.next({ message: message, type: type, okCallback: okCallback, cancelCallback: cancelCallback, okLabel: okLabel, cancelLabel: cancelLabel, defaultValue: defaultValue });
     };
-    /**
-     * @param {?} data
-     * @param {?=} separatorOrDetail
-     * @param {?=} severity
-     * @return {?}
-     */
-    AlertService.prototype.showMessage = /**
-     * @param {?} data
-     * @param {?=} separatorOrDetail
-     * @param {?=} severity
-     * @return {?}
-     */
-    function (data, separatorOrDetail, severity) {
+    AlertService.prototype.showMessage = function (data, separatorOrDetail, severity) {
         var e_1, _a;
         if (!severity) {
             severity = MessageSeverity.default;
@@ -66,7 +29,6 @@ var AlertService = /** @class */ (function () {
             try {
                 for (var data_1 = __values(data), data_1_1 = data_1.next(); !data_1_1.done; data_1_1 = data_1.next()) {
                     var message = data_1_1.value;
-                    /** @type {?} */
                     var msgObject = Utilities.splitInTwo(message, separatorOrDetail);
                     this.showMessageHelper(msgObject.firstPart, msgObject.secondPart, severity, false);
                 }
@@ -83,23 +45,7 @@ var AlertService = /** @class */ (function () {
             this.showMessageHelper(data, separatorOrDetail, severity, false);
         }
     };
-    /**
-     * @param {?} data
-     * @param {?=} separatorOrDetail
-     * @param {?=} severity
-     * @param {?=} error
-     * @param {?=} onRemove
-     * @return {?}
-     */
-    AlertService.prototype.showStickyMessage = /**
-     * @param {?} data
-     * @param {?=} separatorOrDetail
-     * @param {?=} severity
-     * @param {?=} error
-     * @param {?=} onRemove
-     * @return {?}
-     */
-    function (data, separatorOrDetail, severity, error, onRemove) {
+    AlertService.prototype.showStickyMessage = function (data, separatorOrDetail, severity, error, onRemove) {
         var e_2, _a;
         if (!severity) {
             severity = MessageSeverity.default;
@@ -112,7 +58,6 @@ var AlertService = /** @class */ (function () {
             try {
                 for (var data_2 = __values(data), data_2_1 = data_2.next(); !data_2_1.done; data_2_1 = data_2.next()) {
                     var message = data_2_1.value;
-                    /** @type {?} */
                     var msgObject = Utilities.splitInTwo(message, separatorOrDetail);
                     this.showMessageHelper(msgObject.firstPart, msgObject.secondPart, severity, true);
                 }
@@ -127,7 +72,6 @@ var AlertService = /** @class */ (function () {
         }
         else {
             if (error) {
-                /** @type {?} */
                 var msg = "Severity: \"" + MessageSeverity[severity] + "\", Summary: \"" + data + "\", Detail: \"" + separatorOrDetail + "\", Error: \"" + Utilities.safeStringify(error) + "\"";
                 switch (severity) {
                     case MessageSeverity.default:
@@ -153,26 +97,7 @@ var AlertService = /** @class */ (function () {
             this.showMessageHelper(data, separatorOrDetail, severity, true, onRemove);
         }
     };
-    /**
-     * @private
-     * @param {?} summary
-     * @param {?} detail
-     * @param {?} severity
-     * @param {?} isSticky
-     * @param {?=} onRemove
-     * @return {?}
-     */
-    AlertService.prototype.showMessageHelper = /**
-     * @private
-     * @param {?} summary
-     * @param {?} detail
-     * @param {?} severity
-     * @param {?} isSticky
-     * @param {?=} onRemove
-     * @return {?}
-     */
-    function (summary, detail, severity, isSticky, onRemove) {
-        /** @type {?} */
+    AlertService.prototype.showMessageHelper = function (summary, detail, severity, isSticky, onRemove) {
         var alertCommand = {
             operation: isSticky ? 'add_sticky' : 'add',
             message: { severity: severity, summary: summary, detail: detail },
@@ -180,179 +105,54 @@ var AlertService = /** @class */ (function () {
         };
         this.messages.next(alertCommand);
     };
-    /**
-     * @return {?}
-     */
-    AlertService.prototype.resetStickyMessage = /**
-     * @return {?}
-     */
-    function () {
+    AlertService.prototype.resetStickyMessage = function () {
         this.messages.next({ operation: 'clear' });
     };
-    /**
-     * @param {?=} message
-     * @param {?=} caption
-     * @return {?}
-     */
-    AlertService.prototype.startLoadingMessage = /**
-     * @param {?=} message
-     * @param {?=} caption
-     * @return {?}
-     */
-    function (message, caption) {
+    AlertService.prototype.startLoadingMessage = function (message, caption) {
         var _this = this;
         if (message === void 0) { message = 'Loading...'; }
         if (caption === void 0) { caption = ''; }
         clearTimeout(this.loadingMessageTimeoutId);
-        this.loadingMessageTimeoutId = setTimeout((/**
-         * @return {?}
-         */
-        function () {
+        this.loadingMessageTimeoutId = setTimeout(function () {
             _this.showStickyMessage(caption, message, MessageSeverity.wait);
-        }), 1000);
+        }, 1000);
     };
-    /**
-     * @return {?}
-     */
-    AlertService.prototype.stopLoadingMessage = /**
-     * @return {?}
-     */
-    function () {
+    AlertService.prototype.stopLoadingMessage = function () {
         clearTimeout(this.loadingMessageTimeoutId);
         this.resetStickyMessage();
     };
-    /**
-     * @param {?} msg
-     * @return {?}
-     */
-    AlertService.prototype.logDebug = /**
-     * @param {?} msg
-     * @return {?}
-     */
-    function (msg) {
+    AlertService.prototype.logDebug = function (msg) {
         console.debug(msg);
     };
-    /**
-     * @param {?} msg
-     * @return {?}
-     */
-    AlertService.prototype.logError = /**
-     * @param {?} msg
-     * @return {?}
-     */
-    function (msg) {
+    AlertService.prototype.logError = function (msg) {
         console.error(msg);
     };
-    /**
-     * @param {?} msg
-     * @return {?}
-     */
-    AlertService.prototype.logInfo = /**
-     * @param {?} msg
-     * @return {?}
-     */
-    function (msg) {
+    AlertService.prototype.logInfo = function (msg) {
         console.info(msg);
     };
-    /**
-     * @param {?} msg
-     * @return {?}
-     */
-    AlertService.prototype.logMessage = /**
-     * @param {?} msg
-     * @return {?}
-     */
-    function (msg) {
+    AlertService.prototype.logMessage = function (msg) {
         console.log(msg);
     };
-    /**
-     * @param {?} msg
-     * @return {?}
-     */
-    AlertService.prototype.logTrace = /**
-     * @param {?} msg
-     * @return {?}
-     */
-    function (msg) {
+    AlertService.prototype.logTrace = function (msg) {
         console.trace(msg);
     };
-    /**
-     * @param {?} msg
-     * @return {?}
-     */
-    AlertService.prototype.logWarning = /**
-     * @param {?} msg
-     * @return {?}
-     */
-    function (msg) {
+    AlertService.prototype.logWarning = function (msg) {
         console.warn(msg);
     };
-    /**
-     * @return {?}
-     */
-    AlertService.prototype.getDialogEvent = /**
-     * @return {?}
-     */
-    function () {
+    AlertService.prototype.getDialogEvent = function () {
         return this.dialogs.asObservable();
     };
-    /**
-     * @return {?}
-     */
-    AlertService.prototype.getMessageEvent = /**
-     * @return {?}
-     */
-    function () {
+    AlertService.prototype.getMessageEvent = function () {
         return this.messages.asObservable();
     };
-    AlertService.decorators = [
-        { type: Injectable }
-    ];
+    /** @nocollapse */ AlertService.ɵfac = function AlertService_Factory(t) { return new (t || AlertService)(); };
+    /** @nocollapse */ AlertService.ɵprov = ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac });
     return AlertService;
 }());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    AlertService.prototype.messages;
-    /**
-     * @type {?}
-     * @private
-     */
-    AlertService.prototype.dialogs;
-    /**
-     * @type {?}
-     * @private
-     */
-    AlertService.prototype.loadingMessageTimeoutId;
-}
+/*@__PURE__*/ (function () { ɵsetClassMetadata(AlertService, [{
+        type: Injectable
+    }], null, null); })();
 
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/services/configuration.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- */
-function UserConfiguration() { }
-if (false) {
-    /** @type {?} */
-    UserConfiguration.prototype.language;
-    /** @type {?} */
-    UserConfiguration.prototype.homeUrl;
-    /** @type {?} */
-    UserConfiguration.prototype.themeId;
-    /** @type {?} */
-    UserConfiguration.prototype.showDashboardStatistics;
-    /** @type {?} */
-    UserConfiguration.prototype.showDashboardNotifications;
-    /** @type {?} */
-    UserConfiguration.prototype.showDashboardTodo;
-    /** @type {?} */
-    UserConfiguration.prototype.showDashboardBanner;
-}
 var ConfigurationService = /** @class */ (function () {
     function ConfigurationService(localStoreManagerProvider, translationServiceProvider, themeManagerProvider) {
         this.baseUrl = environment.baseUrl || Utilities.baseUrl();
@@ -375,17 +175,10 @@ var ConfigurationService = /** @class */ (function () {
         this.loadLocalChanges();
     }
     Object.defineProperty(ConfigurationService.prototype, "language", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._language || ConfigurationServiceConstants.defaultLanguage;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._language = value;
             this.saveToLocalStore(value, DBkeys.LANGUAGE);
             this.translationService.changeLanguage(value);
@@ -394,17 +187,10 @@ var ConfigurationService = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ConfigurationService.prototype, "themeId", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._themeId || ConfigurationServiceConstants.defaultThemeId;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             value = +value;
             this._themeId = value;
             this.saveToLocalStore(value, DBkeys.THEME_ID);
@@ -414,17 +200,10 @@ var ConfigurationService = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ConfigurationService.prototype, "homeUrl", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._homeUrl || ConfigurationServiceConstants.defaultHomeUrl;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._homeUrl = value;
             this.saveToLocalStore(value, DBkeys.HOME_URL);
         },
@@ -432,17 +211,10 @@ var ConfigurationService = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ConfigurationService.prototype, "showDashboardStatistics", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._showDashboardStatistics != null ? this._showDashboardStatistics : ConfigurationServiceConstants.defaultShowDashboardStatistics;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._showDashboardStatistics = value;
             this.saveToLocalStore(value, DBkeys.SHOW_DASHBOARD_STATISTICS);
         },
@@ -450,17 +222,10 @@ var ConfigurationService = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ConfigurationService.prototype, "showDashboardNotifications", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._showDashboardNotifications != null ? this._showDashboardNotifications : ConfigurationServiceConstants.defaultShowDashboardNotifications;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._showDashboardNotifications = value;
             this.saveToLocalStore(value, DBkeys.SHOW_DASHBOARD_NOTIFICATIONS);
         },
@@ -468,17 +233,10 @@ var ConfigurationService = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ConfigurationService.prototype, "showDashboardTodo", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._showDashboardTodo != null ? this._showDashboardTodo : ConfigurationServiceConstants.defaultShowDashboardTodo;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._showDashboardTodo = value;
             this.saveToLocalStore(value, DBkeys.SHOW_DASHBOARD_TODO);
         },
@@ -486,32 +244,17 @@ var ConfigurationService = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ConfigurationService.prototype, "showDashboardBanner", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._showDashboardBanner != null ? this._showDashboardBanner : ConfigurationServiceConstants.defaultShowDashboardBanner;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._showDashboardBanner = value;
             this.saveToLocalStore(value, DBkeys.SHOW_DASHBOARD_BANNER);
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @private
-     * @return {?}
-     */
-    ConfigurationService.prototype.loadLocalChanges = /**
-     * @private
-     * @return {?}
-     */
-    function () {
+    ConfigurationService.prototype.loadLocalChanges = function () {
         if (this.localStorage.exists(DBkeys.LANGUAGE)) {
             this._language = this.localStorage.getDataObject(DBkeys.LANGUAGE, false);
             this.translationService.changeLanguage(this._language);
@@ -542,37 +285,13 @@ var ConfigurationService = /** @class */ (function () {
             this._showDashboardBanner = this.localStorage.getDataObject(DBkeys.SHOW_DASHBOARD_BANNER, false);
         }
     };
-    /**
-     * @private
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
-     */
-    ConfigurationService.prototype.saveToLocalStore = /**
-     * @private
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
-     */
-    function (data, key) {
+    ConfigurationService.prototype.saveToLocalStore = function (data, key) {
         var _this = this;
-        setTimeout((/**
-         * @return {?}
-         */
-        function () { return _this.localStorage.savePermanentData(data, key); }));
+        setTimeout(function () { return _this.localStorage.savePermanentData(data, key); });
     };
-    /**
-     * @param {?} jsonValue
-     * @return {?}
-     */
-    ConfigurationService.prototype.import = /**
-     * @param {?} jsonValue
-     * @return {?}
-     */
-    function (jsonValue) {
+    ConfigurationService.prototype.import = function (jsonValue) {
         this.clearLocalChanges();
         if (jsonValue) {
-            /** @type {?} */
             var importValue = Utilities.JsonTryParse(jsonValue);
             if (importValue.language != null) {
                 this.language = importValue.language;
@@ -598,17 +317,8 @@ var ConfigurationService = /** @class */ (function () {
         }
         this.onConfigurationImported.next();
     };
-    /**
-     * @param {?=} changesOnly
-     * @return {?}
-     */
-    ConfigurationService.prototype.export = /**
-     * @param {?=} changesOnly
-     * @return {?}
-     */
-    function (changesOnly) {
+    ConfigurationService.prototype.export = function (changesOnly) {
         if (changesOnly === void 0) { changesOnly = true; }
-        /** @type {?} */
         var exportValue = {
             language: changesOnly ? this._language : this.language,
             themeId: changesOnly ? this._themeId : this.themeId,
@@ -620,13 +330,7 @@ var ConfigurationService = /** @class */ (function () {
         };
         return JSON.stringify(exportValue);
     };
-    /**
-     * @return {?}
-     */
-    ConfigurationService.prototype.clearLocalChanges = /**
-     * @return {?}
-     */
-    function () {
+    ConfigurationService.prototype.clearLocalChanges = function () {
         this._language = null;
         this._themeId = null;
         this._homeUrl = null;
@@ -644,16 +348,7 @@ var ConfigurationService = /** @class */ (function () {
         this.resetLanguage();
         this.resetTheme();
     };
-    /**
-     * @private
-     * @return {?}
-     */
-    ConfigurationService.prototype.resetLanguage = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    ConfigurationService.prototype.resetLanguage = function () {
         var language = this.translationService.useBrowserLanguage();
         if (language) {
             this._language = language;
@@ -662,102 +357,18 @@ var ConfigurationService = /** @class */ (function () {
             this._language = this.translationService.useDefaultLangage();
         }
     };
-    /**
-     * @private
-     * @return {?}
-     */
-    ConfigurationService.prototype.resetTheme = /**
-     * @private
-     * @return {?}
-     */
-    function () {
+    ConfigurationService.prototype.resetTheme = function () {
         this.themeManager.installTheme();
         this._themeId = null;
     };
-    ConfigurationService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    ConfigurationService.ctorParameters = function () { return [
-        { type: LocalStoreManagerServiceAbstractProvider },
-        { type: TranslationServiceAbstractProvider },
-        { type: ThemeManagerAbstractProvider }
-    ]; };
+    /** @nocollapse */ ConfigurationService.ɵfac = function ConfigurationService_Factory(t) { return new (t || ConfigurationService)(ɵɵinject(LocalStoreManagerServiceAbstractProvider), ɵɵinject(TranslationServiceAbstractProvider), ɵɵinject(ThemeManagerAbstractProvider)); };
+    /** @nocollapse */ ConfigurationService.ɵprov = ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac });
     return ConfigurationService;
 }());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype.localStorage;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype.translationService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype.themeManager;
-    /** @type {?} */
-    ConfigurationService.prototype.baseUrl;
-    /** @type {?} */
-    ConfigurationService.prototype.tokenUrl;
-    /** @type {?} */
-    ConfigurationService.prototype.loginUrl;
-    /** @type {?} */
-    ConfigurationService.prototype.fallbackBaseUrl;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._language;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._homeUrl;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._themeId;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._showDashboardStatistics;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._showDashboardNotifications;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._showDashboardTodo;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype._showDashboardBanner;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigurationService.prototype.onConfigurationImported;
-    /** @type {?} */
-    ConfigurationService.prototype.configurationImported$;
-}
+/*@__PURE__*/ (function () { ɵsetClassMetadata(ConfigurationService, [{
+        type: Injectable
+    }], function () { return [{ type: LocalStoreManagerServiceAbstractProvider }, { type: TranslationServiceAbstractProvider }, { type: ThemeManagerAbstractProvider }]; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/services/app-translation.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var AppTranslationService = /** @class */ (function () {
     function AppTranslationService(translate) {
         this.translate = translate;
@@ -766,166 +377,61 @@ var AppTranslationService = /** @class */ (function () {
         this.addLanguages(['en', 'fr', 'de', 'pt', 'ar', 'ko']);
         this.setDefaultLanguage('en');
     }
-    /**
-     * @param {?} lang
-     * @return {?}
-     */
-    AppTranslationService.prototype.addLanguages = /**
-     * @param {?} lang
-     * @return {?}
-     */
-    function (lang) {
+    AppTranslationService.prototype.addLanguages = function (lang) {
         this.translate.addLangs(lang);
     };
-    /**
-     * @param {?} lang
-     * @return {?}
-     */
-    AppTranslationService.prototype.setDefaultLanguage = /**
-     * @param {?} lang
-     * @return {?}
-     */
-    function (lang) {
+    AppTranslationService.prototype.setDefaultLanguage = function (lang) {
         this.translate.setDefaultLang(lang);
     };
-    /**
-     * @return {?}
-     */
-    AppTranslationService.prototype.getDefaultLanguage = /**
-     * @return {?}
-     */
-    function () {
+    AppTranslationService.prototype.getDefaultLanguage = function () {
         return this.translate.defaultLang;
     };
-    /**
-     * @return {?}
-     */
-    AppTranslationService.prototype.getBrowserLanguage = /**
-     * @return {?}
-     */
-    function () {
+    AppTranslationService.prototype.getBrowserLanguage = function () {
         return this.translate.getBrowserLang();
     };
-    /**
-     * @return {?}
-     */
-    AppTranslationService.prototype.getCurrentLanguage = /**
-     * @return {?}
-     */
-    function () {
+    AppTranslationService.prototype.getCurrentLanguage = function () {
         return this.translate.currentLang;
     };
-    /**
-     * @return {?}
-     */
-    AppTranslationService.prototype.getLoadedLanguages = /**
-     * @return {?}
-     */
-    function () {
+    AppTranslationService.prototype.getLoadedLanguages = function () {
         return this.translate.langs;
     };
-    /**
-     * @return {?}
-     */
-    AppTranslationService.prototype.useBrowserLanguage = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    AppTranslationService.prototype.useBrowserLanguage = function () {
         var browserLang = this.getBrowserLanguage();
         if (browserLang.match(/en|fr|de|pt|ar|ko/)) {
             this.changeLanguage(browserLang);
             return browserLang;
         }
     };
-    /**
-     * @return {?}
-     */
-    AppTranslationService.prototype.useDefaultLangage = /**
-     * @return {?}
-     */
-    function () {
+    AppTranslationService.prototype.useDefaultLangage = function () {
         return this.changeLanguage(null);
     };
-    /**
-     * @param {?} language
-     * @return {?}
-     */
-    AppTranslationService.prototype.changeLanguage = /**
-     * @param {?} language
-     * @return {?}
-     */
-    function (language) {
+    AppTranslationService.prototype.changeLanguage = function (language) {
         var _this = this;
         if (!language) {
             language = this.getDefaultLanguage();
         }
         if (language != this.translate.currentLang) {
-            setTimeout((/**
-             * @return {?}
-             */
-            function () {
+            setTimeout(function () {
                 _this.translate.use(language);
                 _this.onLanguageChanged.next(language);
-            }));
+            });
         }
         return language;
     };
-    /**
-     * @param {?} key
-     * @param {?=} interpolateParams
-     * @return {?}
-     */
-    AppTranslationService.prototype.getTranslation = /**
-     * @param {?} key
-     * @param {?=} interpolateParams
-     * @return {?}
-     */
-    function (key, interpolateParams) {
+    AppTranslationService.prototype.getTranslation = function (key, interpolateParams) {
         return this.translate.instant(key, interpolateParams);
     };
-    /**
-     * @param {?} key
-     * @param {?=} interpolateParams
-     * @return {?}
-     */
-    AppTranslationService.prototype.getTranslationAsync = /**
-     * @param {?} key
-     * @param {?=} interpolateParams
-     * @return {?}
-     */
-    function (key, interpolateParams) {
+    AppTranslationService.prototype.getTranslationAsync = function (key, interpolateParams) {
         return this.translate.get(key, interpolateParams);
     };
-    AppTranslationService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    AppTranslationService.ctorParameters = function () { return [
-        { type: TranslateService }
-    ]; };
+    /** @nocollapse */ AppTranslationService.ɵfac = function AppTranslationService_Factory(t) { return new (t || AppTranslationService)(ɵɵinject(TranslateService)); };
+    /** @nocollapse */ AppTranslationService.ɵprov = ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac });
     return AppTranslationService;
 }());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    AppTranslationService.prototype.onLanguageChanged;
-    /** @type {?} */
-    AppTranslationService.prototype.languageChanged$;
-    /**
-     * @type {?}
-     * @private
-     */
-    AppTranslationService.prototype.translate;
-}
+/*@__PURE__*/ (function () { ɵsetClassMetadata(AppTranslationService, [{
+        type: Injectable
+    }], function () { return [{ type: TranslateService }]; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/services/local-store-manager.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var LocalStoreManager = /** @class */ (function () {
     function LocalStoreManager() {
         var _this = this;
@@ -941,11 +447,7 @@ var LocalStoreManager = /** @class */ (function () {
             'removeFromSessionStorage',
             'clearAllSessionsStorage'
         ];
-        this.sessionStorageTransferHandler = (/**
-         * @param {?} event
-         * @return {?}
-         */
-        function (event) {
+        this.sessionStorageTransferHandler = function (event) {
             if (!event.newValue) {
                 return;
             }
@@ -959,7 +461,6 @@ var LocalStoreManager = /** @class */ (function () {
                 if (!_this.syncKeys.length) {
                     _this.loadSyncKeys();
                 }
-                /** @type {?} */
                 var data = JSON.parse(event.newValue);
                 // console.info("Set => Key: Transfer setSessionStorage" + ",  data: " + JSON.stringify(data));
                 for (var key in data) {
@@ -970,7 +471,6 @@ var LocalStoreManager = /** @class */ (function () {
                 _this.onInit();
             }
             else if (event.key == 'addToSessionStorage') {
-                /** @type {?} */
                 var data = JSON.parse(event.newValue);
                 // console.warn("Set => Key: Transfer addToSessionStorage" + ",  data: " + JSON.stringify(data));
                 _this.addToSessionStorageHelper(data.data, data.key);
@@ -987,15 +487,9 @@ var LocalStoreManager = /** @class */ (function () {
             else if (event.key == 'removeFromSyncKeys') {
                 _this.removeFromSyncKeysHelper(event.newValue);
             }
-        });
+        };
     }
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.initialiseStorageSyncListener = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.initialiseStorageSyncListener = function () {
         if (LocalStoreManager.syncListenerInitialised == true) {
             return;
         }
@@ -1003,620 +497,232 @@ var LocalStoreManager = /** @class */ (function () {
         window.addEventListener('storage', this.sessionStorageTransferHandler, false);
         this.syncSessionStorage();
     };
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.deinitialiseStorageSyncListener = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.deinitialiseStorageSyncListener = function () {
         window.removeEventListener('storage', this.sessionStorageTransferHandler, false);
         LocalStoreManager.syncListenerInitialised = false;
     };
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.clearAllStorage = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.clearAllStorage = function () {
         this.clearAllSessionsStorage();
         this.clearLocalStorage();
     };
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.clearAllSessionsStorage = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.clearAllSessionsStorage = function () {
         this.clearInstanceSessionStorage();
         localStorage.removeItem(LocalStoreManager.DBKEY_SYNC_KEYS);
         localStorage.setItem('clearAllSessionsStorage', '_dummy');
         localStorage.removeItem('clearAllSessionsStorage');
     };
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.clearInstanceSessionStorage = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.clearInstanceSessionStorage = function () {
         sessionStorage.clear();
         this.syncKeys = [];
     };
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.clearLocalStorage = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.clearLocalStorage = function () {
         localStorage.clear();
     };
-    /**
-     * @param {?} data
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.saveSessionData = /**
-     * @param {?} data
-     * @param {?=} key
-     * @return {?}
-     */
-    function (data, key) {
+    LocalStoreManager.prototype.saveSessionData = function (data, key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
         this.removeFromSyncKeys(key);
         localStorage.removeItem(key);
         this.sessionStorageSetItem(key, data);
     };
-    /**
-     * @param {?} data
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.saveSyncedSessionData = /**
-     * @param {?} data
-     * @param {?=} key
-     * @return {?}
-     */
-    function (data, key) {
+    LocalStoreManager.prototype.saveSyncedSessionData = function (data, key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
         localStorage.removeItem(key);
         this.addToSessionStorage(data, key);
     };
-    /**
-     * @param {?} data
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.savePermanentData = /**
-     * @param {?} data
-     * @param {?=} key
-     * @return {?}
-     */
-    function (data, key) {
+    LocalStoreManager.prototype.savePermanentData = function (data, key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
         this.removeFromSessionStorage(key);
         this.localStorageSetItem(key, data);
     };
-    /**
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.moveDataToSessionStorage = /**
-     * @param {?=} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.moveDataToSessionStorage = function (key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
-        /** @type {?} */
         var data = this.getData(key);
         if (data == null) {
             return;
         }
         this.saveSessionData(data, key);
     };
-    /**
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.moveDataToSyncedSessionStorage = /**
-     * @param {?=} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.moveDataToSyncedSessionStorage = function (key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
-        /** @type {?} */
         var data = this.getData(key);
         if (data == null) {
             return;
         }
         this.saveSyncedSessionData(data, key);
     };
-    /**
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.moveDataToPermanentStorage = /**
-     * @param {?=} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.moveDataToPermanentStorage = function (key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
-        /** @type {?} */
         var data = this.getData(key);
         if (data == null) {
             return;
         }
         this.savePermanentData(data, key);
     };
-    /**
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.exists = /**
-     * @param {?=} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.exists = function (key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
-        /** @type {?} */
         var data = sessionStorage.getItem(key);
         if (data == null) {
             data = localStorage.getItem(key);
         }
         return data != null;
     };
-    /**
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.getData = /**
-     * @param {?=} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.getData = function (key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
-        /** @type {?} */
         var data = this.sessionStorageGetItem(key);
         if (data == null) {
             data = this.localStorageGetItem(key);
         }
         return data;
     };
-    /**
-     * @template T
-     * @param {?=} key
-     * @param {?=} isDateType
-     * @return {?}
-     */
-    LocalStoreManager.prototype.getDataObject = /**
-     * @template T
-     * @param {?=} key
-     * @param {?=} isDateType
-     * @return {?}
-     */
-    function (key, isDateType) {
+    LocalStoreManager.prototype.getDataObject = function (key, isDateType) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         if (isDateType === void 0) { isDateType = false; }
-        /** @type {?} */
         var data = this.getData(key);
         if (data != null) {
             if (isDateType) {
                 data = new Date(data);
             }
-            return (/** @type {?} */ (data));
+            return data;
         }
         else {
             return null;
         }
     };
-    /**
-     * @param {?=} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.deleteData = /**
-     * @param {?=} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.deleteData = function (key) {
         if (key === void 0) { key = StorageManagerConstants.DBKEY_USER_DATA; }
         this.testForInvalidKeys(key);
         this.removeFromSessionStorage(key);
         localStorage.removeItem(key);
     };
-    /**
-     * @return {?}
-     */
-    LocalStoreManager.prototype.getInitEvent = /**
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.getInitEvent = function () {
         return this.initEvent.asObservable();
     };
-    /**
-     * @private
-     * @return {?}
-     */
-    LocalStoreManager.prototype.syncSessionStorage = /**
-     * @private
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.syncSessionStorage = function () {
         localStorage.setItem('getSessionStorage', '_dummy');
         localStorage.removeItem('getSessionStorage');
     };
-    /**
-     * @private
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.addToSessionStorage = /**
-     * @private
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
-     */
-    function (data, key) {
+    LocalStoreManager.prototype.addToSessionStorage = function (data, key) {
         this.addToSessionStorageHelper(data, key);
         this.addToSyncKeysBackup(key);
         this.localStorageSetItem('addToSessionStorage', { key: key, data: data });
         localStorage.removeItem('addToSessionStorage');
     };
-    /**
-     * @private
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.addToSessionStorageHelper = /**
-     * @private
-     * @param {?} data
-     * @param {?} key
-     * @return {?}
-     */
-    function (data, key) {
+    LocalStoreManager.prototype.addToSessionStorageHelper = function (data, key) {
         this.addToSyncKeysHelper(key);
         this.sessionStorageSetItem(key, data);
     };
-    /**
-     * @private
-     * @param {?} keyToRemove
-     * @return {?}
-     */
-    LocalStoreManager.prototype.removeFromSessionStorage = /**
-     * @private
-     * @param {?} keyToRemove
-     * @return {?}
-     */
-    function (keyToRemove) {
+    LocalStoreManager.prototype.removeFromSessionStorage = function (keyToRemove) {
         this.removeFromSessionStorageHelper(keyToRemove);
         this.removeFromSyncKeysBackup(keyToRemove);
         localStorage.setItem('removeFromSessionStorage', keyToRemove);
         localStorage.removeItem('removeFromSessionStorage');
     };
-    /**
-     * @private
-     * @param {?} keyToRemove
-     * @return {?}
-     */
-    LocalStoreManager.prototype.removeFromSessionStorageHelper = /**
-     * @private
-     * @param {?} keyToRemove
-     * @return {?}
-     */
-    function (keyToRemove) {
+    LocalStoreManager.prototype.removeFromSessionStorageHelper = function (keyToRemove) {
         sessionStorage.removeItem(keyToRemove);
         this.removeFromSyncKeysHelper(keyToRemove);
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.testForInvalidKeys = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.testForInvalidKeys = function (key) {
         if (!key) {
             throw new Error('key cannot be empty');
         }
-        if (this.reservedKeys.some((/**
-         * @param {?} x
-         * @return {?}
-         */
-        function (x) { return x == key; }))) {
+        if (this.reservedKeys.some(function (x) { return x == key; })) {
             throw new Error("The storage key \"" + key + "\" is reserved and cannot be used. Please use a different key");
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.syncKeysContains = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
-        return this.syncKeys.some((/**
-         * @param {?} x
-         * @return {?}
-         */
-        function (x) { return x == key; }));
+    LocalStoreManager.prototype.syncKeysContains = function (key) {
+        return this.syncKeys.some(function (x) { return x == key; });
     };
-    /**
-     * @private
-     * @return {?}
-     */
-    LocalStoreManager.prototype.loadSyncKeys = /**
-     * @private
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.loadSyncKeys = function () {
         if (this.syncKeys.length) {
             return;
         }
         this.syncKeys = this.getSyncKeysFromStorage();
     };
-    /**
-     * @private
-     * @param {?=} defaultValue
-     * @return {?}
-     */
-    LocalStoreManager.prototype.getSyncKeysFromStorage = /**
-     * @private
-     * @param {?=} defaultValue
-     * @return {?}
-     */
-    function (defaultValue) {
+    LocalStoreManager.prototype.getSyncKeysFromStorage = function (defaultValue) {
         if (defaultValue === void 0) { defaultValue = []; }
-        /** @type {?} */
         var data = this.localStorageGetItem(LocalStoreManager.DBKEY_SYNC_KEYS);
         if (data == null) {
             return defaultValue;
         }
         else {
-            return (/** @type {?} */ (data));
+            return data;
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.addToSyncKeys = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.addToSyncKeys = function (key) {
         this.addToSyncKeysHelper(key);
         this.addToSyncKeysBackup(key);
         localStorage.setItem('addToSyncKeys', key);
         localStorage.removeItem('addToSyncKeys');
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.addToSyncKeysBackup = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
-        /** @type {?} */
+    LocalStoreManager.prototype.addToSyncKeysBackup = function (key) {
         var storedSyncKeys = this.getSyncKeysFromStorage();
-        if (!storedSyncKeys.some((/**
-         * @param {?} x
-         * @return {?}
-         */
-        function (x) { return x == key; }))) {
+        if (!storedSyncKeys.some(function (x) { return x == key; })) {
             storedSyncKeys.push(key);
             this.localStorageSetItem(LocalStoreManager.DBKEY_SYNC_KEYS, storedSyncKeys);
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.removeFromSyncKeysBackup = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
-        /** @type {?} */
+    LocalStoreManager.prototype.removeFromSyncKeysBackup = function (key) {
         var storedSyncKeys = this.getSyncKeysFromStorage();
-        /** @type {?} */
         var index = storedSyncKeys.indexOf(key);
         if (index > -1) {
             storedSyncKeys.splice(index, 1);
             this.localStorageSetItem(LocalStoreManager.DBKEY_SYNC_KEYS, storedSyncKeys);
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.addToSyncKeysHelper = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.addToSyncKeysHelper = function (key) {
         if (!this.syncKeysContains(key)) {
             this.syncKeys.push(key);
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.removeFromSyncKeys = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.removeFromSyncKeys = function (key) {
         this.removeFromSyncKeysHelper(key);
         this.removeFromSyncKeysBackup(key);
         localStorage.setItem('removeFromSyncKeys', key);
         localStorage.removeItem('removeFromSyncKeys');
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.removeFromSyncKeysHelper = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
-        /** @type {?} */
+    LocalStoreManager.prototype.removeFromSyncKeysHelper = function (key) {
         var index = this.syncKeys.indexOf(key);
         if (index > -1) {
             this.syncKeys.splice(index, 1);
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @param {?} data
-     * @return {?}
-     */
-    LocalStoreManager.prototype.localStorageSetItem = /**
-     * @private
-     * @param {?} key
-     * @param {?} data
-     * @return {?}
-     */
-    function (key, data) {
+    LocalStoreManager.prototype.localStorageSetItem = function (key, data) {
         localStorage.setItem(key, JSON.stringify(data));
     };
-    /**
-     * @private
-     * @param {?} key
-     * @param {?} data
-     * @return {?}
-     */
-    LocalStoreManager.prototype.sessionStorageSetItem = /**
-     * @private
-     * @param {?} key
-     * @param {?} data
-     * @return {?}
-     */
-    function (key, data) {
+    LocalStoreManager.prototype.sessionStorageSetItem = function (key, data) {
         sessionStorage.setItem(key, JSON.stringify(data));
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.localStorageGetItem = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.localStorageGetItem = function (key) {
         return Utilities.JsonTryParse(localStorage.getItem(key));
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    LocalStoreManager.prototype.sessionStorageGetItem = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    LocalStoreManager.prototype.sessionStorageGetItem = function (key) {
         return Utilities.JsonTryParse(sessionStorage.getItem(key));
     };
-    /**
-     * @private
-     * @return {?}
-     */
-    LocalStoreManager.prototype.onInit = /**
-     * @private
-     * @return {?}
-     */
-    function () {
+    LocalStoreManager.prototype.onInit = function () {
         var _this = this;
-        setTimeout((/**
-         * @return {?}
-         */
-        function () {
+        setTimeout(function () {
             _this.initEvent.next();
             _this.initEvent.complete();
-        }));
+        });
     };
     LocalStoreManager.syncListenerInitialised = false;
     LocalStoreManager.DBKEY_SYNC_KEYS = 'sync_keys';
-    LocalStoreManager.decorators = [
-        { type: Injectable }
-    ];
+    /** @nocollapse */ LocalStoreManager.ɵfac = function LocalStoreManager_Factory(t) { return new (t || LocalStoreManager)(); };
+    /** @nocollapse */ LocalStoreManager.ɵprov = ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac });
     return LocalStoreManager;
 }());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    LocalStoreManager.syncListenerInitialised;
-    /**
-     * @type {?}
-     * @private
-     */
-    LocalStoreManager.DBKEY_SYNC_KEYS;
-    /**
-     * @type {?}
-     * @private
-     */
-    LocalStoreManager.prototype.syncKeys;
-    /**
-     * @type {?}
-     * @private
-     */
-    LocalStoreManager.prototype.initEvent;
-    /**
-     * @type {?}
-     * @private
-     */
-    LocalStoreManager.prototype.reservedKeys;
-    /**
-     * @type {?}
-     * @private
-     */
-    LocalStoreManager.prototype.sessionStorageTransferHandler;
-}
+/*@__PURE__*/ (function () { ɵsetClassMetadata(LocalStoreManager, [{
+        type: Injectable
+    }], null, null); })();
 
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/services/theme-manager.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+// =============================
 var ThemeManager = /** @class */ (function () {
     function ThemeManager() {
         this.themes = [
@@ -1724,15 +830,7 @@ var ThemeManager = /** @class */ (function () {
             }
         ];
     }
-    /**
-     * @param {?=} theme
-     * @return {?}
-     */
-    ThemeManager.prototype.installTheme = /**
-     * @param {?=} theme
-     * @return {?}
-     */
-    function (theme) {
+    ThemeManager.prototype.installTheme = function (theme) {
         if (theme == null || theme.isDefault) {
             this.removeStyle('theme');
         }
@@ -1740,168 +838,80 @@ var ThemeManager = /** @class */ (function () {
             this.setStyle('theme', "assets/themes/" + theme.href);
         }
     };
-    /**
-     * @return {?}
-     */
-    ThemeManager.prototype.getDefaultTheme = /**
-     * @return {?}
-     */
-    function () {
-        return this.themes.find((/**
-         * @param {?} theme
-         * @return {?}
-         */
-        function (theme) { return theme.isDefault; }));
+    ThemeManager.prototype.getDefaultTheme = function () {
+        return this.themes.find(function (theme) { return theme.isDefault; });
     };
-    /**
-     * @param {?} id
-     * @return {?}
-     */
-    ThemeManager.prototype.getThemeByID = /**
-     * @param {?} id
-     * @return {?}
-     */
-    function (id) {
-        return this.themes.find((/**
-         * @param {?} theme
-         * @return {?}
-         */
-        function (theme) { return theme.id === id; }));
+    ThemeManager.prototype.getThemeByID = function (id) {
+        return this.themes.find(function (theme) { return theme.id === id; });
     };
-    /**
-     * @private
-     * @param {?} key
-     * @param {?} href
-     * @return {?}
-     */
-    ThemeManager.prototype.setStyle = /**
-     * @private
-     * @param {?} key
-     * @param {?} href
-     * @return {?}
-     */
-    function (key, href) {
+    ThemeManager.prototype.setStyle = function (key, href) {
         this.getLinkElementForKey(key).setAttribute('href', href);
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    ThemeManager.prototype.removeStyle = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
-        /** @type {?} */
+    ThemeManager.prototype.removeStyle = function (key) {
         var existingLinkElement = this.getExistingLinkElementByKey(key);
         if (existingLinkElement) {
             document.head.removeChild(existingLinkElement);
         }
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    ThemeManager.prototype.getLinkElementForKey = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    ThemeManager.prototype.getLinkElementForKey = function (key) {
         return this.getExistingLinkElementByKey(key) || this.createLinkElementWithKey(key);
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    ThemeManager.prototype.getExistingLinkElementByKey = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    ThemeManager.prototype.getExistingLinkElementByKey = function (key) {
         return document.head.querySelector("link[rel=\"stylesheet\"]." + this.getClassNameForKey(key));
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    ThemeManager.prototype.createLinkElementWithKey = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
-        /** @type {?} */
+    ThemeManager.prototype.createLinkElementWithKey = function (key) {
         var linkEl = document.createElement('link');
         linkEl.setAttribute('rel', 'stylesheet');
         linkEl.classList.add(this.getClassNameForKey(key));
         document.head.appendChild(linkEl);
         return linkEl;
     };
-    /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    ThemeManager.prototype.getClassNameForKey = /**
-     * @private
-     * @param {?} key
-     * @return {?}
-     */
-    function (key) {
+    ThemeManager.prototype.getClassNameForKey = function (key) {
         return "style-manager-" + key;
     };
-    ThemeManager.decorators = [
-        { type: Injectable }
-    ];
+    /** @nocollapse */ ThemeManager.ɵfac = function ThemeManager_Factory(t) { return new (t || ThemeManager)(); };
+    /** @nocollapse */ ThemeManager.ɵprov = ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac });
     return ThemeManager;
 }());
-if (false) {
-    /** @type {?} */
-    ThemeManager.prototype.themes;
-}
+/*@__PURE__*/ (function () { ɵsetClassMetadata(ThemeManager, [{
+        type: Injectable
+    }], null, null); })();
 
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/ngx-appkit-services-alpha.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var NgxAppkitServicesAlphaModule = /** @class */ (function () {
     function NgxAppkitServicesAlphaModule() {
     }
-    NgxAppkitServicesAlphaModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [],
-                    imports: [],
-                    exports: [],
-                    providers: [
-                        AlertService,
-                        ConfigurationService,
-                        AppTranslationService,
-                        LocalStoreManager,
-                        ThemeManager
-                    ]
-                },] }
-    ];
+    /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵmod = ɵɵdefineNgModule({ type: NgxAppkitServicesAlphaModule });
+    /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [
+            AlertService,
+            ConfigurationService,
+            AppTranslationService,
+            LocalStoreManager,
+            ThemeManager
+        ], imports: [[]] });
     return NgxAppkitServicesAlphaModule;
 }());
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgxAppkitServicesAlphaModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [],
+                imports: [],
+                exports: [],
+                providers: [
+                    AlertService,
+                    ConfigurationService,
+                    AppTranslationService,
+                    LocalStoreManager,
+                    ThemeManager
+                ]
+            }]
+    }], null, null); })();
 
-/**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+/*
+ * Public API Surface of ngx-appkit-services-alpha
  */
 
 /**
- * @fileoverview added by tsickle
- * Generated from: polpware-ngx-appkit-services-alpha.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { AlertService, AppTranslationService, ConfigurationService, LocalStoreManager, NgxAppkitServicesAlphaModule, ThemeManager };

@@ -1,6 +1,7 @@
 import { HttpResponseBase } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAlertServiceContract, AlertCommand, AlertDialog, DialogType, MessageSeverity } from '@polpware/ngx-appkit-contracts-alpha';
+import * as i0 from "@angular/core";
 export declare class AlertService implements IAlertServiceContract {
     private messages;
     private dialogs;
@@ -29,4 +30,6 @@ export declare class AlertService implements IAlertServiceContract {
     logWarning(msg: any): void;
     getDialogEvent(): Observable<AlertDialog>;
     getMessageEvent(): Observable<AlertCommand>;
+    static ɵfac: i0.ɵɵFactoryDef<AlertService, never>;
+    static ɵprov: i0.ɵɵInjectableDef<AlertService>;
 }

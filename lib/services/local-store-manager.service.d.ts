@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { ILocalStoreManagerContract } from '@polpware/ngx-appkit-contracts-alpha';
+import * as i0 from "@angular/core";
 export declare class LocalStoreManager implements ILocalStoreManagerContract {
     private static syncListenerInitialised;
     private static readonly DBKEY_SYNC_KEYS;
@@ -44,4 +45,6 @@ export declare class LocalStoreManager implements ILocalStoreManagerContract {
     private localStorageGetItem;
     private sessionStorageGetItem;
     private onInit;
+    static ɵfac: i0.ɵɵFactoryDef<LocalStoreManager, never>;
+    static ɵprov: i0.ɵɵInjectableDef<LocalStoreManager>;
 }

@@ -1,6 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ITranslationServiceContract } from '@polpware/ngx-appkit-contracts-alpha';
+import * as i0 from "@angular/core";
 export declare class AppTranslationService implements ITranslationServiceContract {
     private translate;
     private onLanguageChanged;
@@ -17,4 +18,6 @@ export declare class AppTranslationService implements ITranslationServiceContrac
     changeLanguage(language: string): string;
     getTranslation(key: string | Array<string>, interpolateParams?: Object): string | any;
     getTranslationAsync(key: string | Array<string>, interpolateParams?: Object): Observable<string | any>;
+    static ɵfac: i0.ɵɵFactoryDef<AppTranslationService, never>;
+    static ɵprov: i0.ɵɵInjectableDef<AppTranslationService>;
 }
