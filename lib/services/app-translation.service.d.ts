@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 import { ITranslationServiceContract } from '@polpware/ngx-appkit-contracts-alpha';
+import { Observable } from 'rxjs';
 import * as i0 from "@angular/core";
 export declare class AppTranslationService implements ITranslationServiceContract {
     private translate;

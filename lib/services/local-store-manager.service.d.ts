@@ -1,6 +1,9 @@
-import { Observable } from 'rxjs';
 import { ILocalStoreManagerContract } from '@polpware/ngx-appkit-contracts-alpha';
+import { Observable } from 'rxjs';
 import * as i0 from "@angular/core";
+/**
+* Provides a wrapper for accessing the web storage API and synchronizing session storage across tabs/windows.
+*/
 export declare class LocalStoreManager implements ILocalStoreManagerContract {
     private static syncListenerInitialised;
     private static readonly DBKEY_SYNC_KEYS;

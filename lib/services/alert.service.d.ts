@@ -1,6 +1,6 @@
 import { HttpResponseBase } from '@angular/common/http';
+import { AlertCommand, AlertDialog, DialogType, IAlertServiceContract, MessageSeverity } from '@polpware/ngx-appkit-contracts-alpha';
 import { Observable } from 'rxjs';
-import { IAlertServiceContract, AlertCommand, AlertDialog, DialogType, MessageSeverity } from '@polpware/ngx-appkit-contracts-alpha';
 import * as i0 from "@angular/core";
 export declare class AlertService implements IAlertServiceContract {
     private messages;

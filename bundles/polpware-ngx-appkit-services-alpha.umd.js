@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common/http'), require('rxjs'), require('@polpware/ngx-appkit-contracts-alpha'), require('@ngx-translate/core')) :
-    typeof define === 'function' && define.amd ? define('@polpware/ngx-appkit-services-alpha', ['exports', '@angular/core', '@angular/common/http', 'rxjs', '@polpware/ngx-appkit-contracts-alpha', '@ngx-translate/core'], factory) :
-    (global = global || self, factory((global.polpware = global.polpware || {}, global.polpware['ngx-appkit-services-alpha'] = {}), global.ng.core, global.ng.common.http, global.rxjs, global.ngxAppkitContractsAlpha, global.core$1));
-}(this, (function (exports, core, http, rxjs, ngxAppkitContractsAlpha, core$1) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('@polpware/ngx-appkit-contracts-alpha'), require('rxjs'), require('@ngx-translate/core')) :
+    typeof define === 'function' && define.amd ? define('@polpware/ngx-appkit-services-alpha', ['exports', '@angular/common/http', '@angular/core', '@polpware/ngx-appkit-contracts-alpha', 'rxjs', '@ngx-translate/core'], factory) :
+    (global = global || self, factory((global.polpware = global.polpware || {}, global.polpware['ngx-appkit-services-alpha'] = {}), global.ng.common.http, global.ng.core, global.ngxAppkitContractsAlpha, global.rxjs, global.core$1));
+}(this, (function (exports, http, core, ngxAppkitContractsAlpha, rxjs, core$1) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -342,11 +342,14 @@
             return this.messages.asObservable();
         };
         /** @nocollapse */ AlertService.ɵfac = function AlertService_Factory(t) { return new (t || AlertService)(); };
-        /** @nocollapse */ AlertService.ɵprov = core.ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac });
+        /** @nocollapse */ AlertService.ɵprov = core.ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac, providedIn: 'root' });
         return AlertService;
     }());
     /*@__PURE__*/ (function () { core.ɵsetClassMetadata(AlertService, [{
-            type: core.Injectable
+            type: core.Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
         }], null, null); })();
 
     var ConfigurationService = /** @class */ (function () {
@@ -354,7 +357,7 @@
             this.baseUrl = ngxAppkitContractsAlpha.environment.baseUrl || ngxAppkitContractsAlpha.Utilities.baseUrl();
             this.tokenUrl = ngxAppkitContractsAlpha.environment.tokenUrl || ngxAppkitContractsAlpha.environment.baseUrl || ngxAppkitContractsAlpha.Utilities.baseUrl();
             this.loginUrl = ngxAppkitContractsAlpha.environment.loginUrl;
-            this.fallbackBaseUrl = 'https://quickapp.ebenmonney.com';
+            this.fallbackBaseUrl = '';
             // ***End of defaults***
             this._language = null;
             this._homeUrl = null;
@@ -558,11 +561,14 @@
             this._themeId = null;
         };
         /** @nocollapse */ ConfigurationService.ɵfac = function ConfigurationService_Factory(t) { return new (t || ConfigurationService)(core.ɵɵinject(ngxAppkitContractsAlpha.LocalStoreManagerServiceAbstractProvider), core.ɵɵinject(ngxAppkitContractsAlpha.TranslationServiceAbstractProvider), core.ɵɵinject(ngxAppkitContractsAlpha.ThemeManagerAbstractProvider)); };
-        /** @nocollapse */ ConfigurationService.ɵprov = core.ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac });
+        /** @nocollapse */ ConfigurationService.ɵprov = core.ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac, providedIn: 'root' });
         return ConfigurationService;
     }());
     /*@__PURE__*/ (function () { core.ɵsetClassMetadata(ConfigurationService, [{
-            type: core.Injectable
+            type: core.Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
         }], function () { return [{ type: ngxAppkitContractsAlpha.LocalStoreManagerServiceAbstractProvider }, { type: ngxAppkitContractsAlpha.TranslationServiceAbstractProvider }, { type: ngxAppkitContractsAlpha.ThemeManagerAbstractProvider }]; }, null); })();
 
     var AppTranslationService = /** @class */ (function () {
@@ -621,13 +627,19 @@
             return this.translate.get(key, interpolateParams);
         };
         /** @nocollapse */ AppTranslationService.ɵfac = function AppTranslationService_Factory(t) { return new (t || AppTranslationService)(core.ɵɵinject(core$1.TranslateService)); };
-        /** @nocollapse */ AppTranslationService.ɵprov = core.ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac });
+        /** @nocollapse */ AppTranslationService.ɵprov = core.ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac, providedIn: 'root' });
         return AppTranslationService;
     }());
     /*@__PURE__*/ (function () { core.ɵsetClassMetadata(AppTranslationService, [{
-            type: core.Injectable
+            type: core.Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
         }], function () { return [{ type: core$1.TranslateService }]; }, null); })();
 
+    /**
+    * Provides a wrapper for accessing the web storage API and synchronizing session storage across tabs/windows.
+    */
     var LocalStoreManager = /** @class */ (function () {
         function LocalStoreManager() {
             var _this = this;
@@ -911,14 +923,16 @@
         LocalStoreManager.syncListenerInitialised = false;
         LocalStoreManager.DBKEY_SYNC_KEYS = 'sync_keys';
         /** @nocollapse */ LocalStoreManager.ɵfac = function LocalStoreManager_Factory(t) { return new (t || LocalStoreManager)(); };
-        /** @nocollapse */ LocalStoreManager.ɵprov = core.ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac });
+        /** @nocollapse */ LocalStoreManager.ɵprov = core.ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac, providedIn: 'root' });
         return LocalStoreManager;
     }());
     /*@__PURE__*/ (function () { core.ɵsetClassMetadata(LocalStoreManager, [{
-            type: core.Injectable
+            type: core.Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
         }], null, null); })();
 
-    // =============================
     var ThemeManager = /** @class */ (function () {
         function ThemeManager() {
             this.themes = [
@@ -1066,24 +1080,21 @@
             return "style-manager-" + key;
         };
         /** @nocollapse */ ThemeManager.ɵfac = function ThemeManager_Factory(t) { return new (t || ThemeManager)(); };
-        /** @nocollapse */ ThemeManager.ɵprov = core.ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac });
+        /** @nocollapse */ ThemeManager.ɵprov = core.ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac, providedIn: 'root' });
         return ThemeManager;
     }());
     /*@__PURE__*/ (function () { core.ɵsetClassMetadata(ThemeManager, [{
-            type: core.Injectable
+            type: core.Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
         }], null, null); })();
 
     var NgxAppkitServicesAlphaModule = /** @class */ (function () {
         function NgxAppkitServicesAlphaModule() {
         }
         /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵmod = core.ɵɵdefineNgModule({ type: NgxAppkitServicesAlphaModule });
-        /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = core.ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [
-                AlertService,
-                ConfigurationService,
-                AppTranslationService,
-                LocalStoreManager,
-                ThemeManager
-            ], imports: [[]] });
+        /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = core.ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [], imports: [[]] });
         return NgxAppkitServicesAlphaModule;
     }());
     /*@__PURE__*/ (function () { core.ɵsetClassMetadata(NgxAppkitServicesAlphaModule, [{
@@ -1092,13 +1103,7 @@
                     declarations: [],
                     imports: [],
                     exports: [],
-                    providers: [
-                        AlertService,
-                        ConfigurationService,
-                        AppTranslationService,
-                        LocalStoreManager,
-                        ThemeManager
-                    ]
+                    providers: []
                 }]
         }], null, null); })();
 

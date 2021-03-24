@@ -1,8 +1,8 @@
 import { __values } from 'tslib';
-import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵinject, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule } from '@angular/core';
 import { HttpResponseBase } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵinject, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule } from '@angular/core';
 import { DialogType, MessageSeverity, Utilities, environment, ConfigurationServiceConstants, DBkeys, LocalStoreManagerServiceAbstractProvider, TranslationServiceAbstractProvider, ThemeManagerAbstractProvider, StorageManagerConstants } from '@polpware/ngx-appkit-contracts-alpha';
+import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 var AlertService = /** @class */ (function () {
@@ -146,11 +146,14 @@ var AlertService = /** @class */ (function () {
         return this.messages.asObservable();
     };
     /** @nocollapse */ AlertService.ɵfac = function AlertService_Factory(t) { return new (t || AlertService)(); };
-    /** @nocollapse */ AlertService.ɵprov = ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac });
+    /** @nocollapse */ AlertService.ɵprov = ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac, providedIn: 'root' });
     return AlertService;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(AlertService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], null, null); })();
 
 var ConfigurationService = /** @class */ (function () {
@@ -158,7 +161,7 @@ var ConfigurationService = /** @class */ (function () {
         this.baseUrl = environment.baseUrl || Utilities.baseUrl();
         this.tokenUrl = environment.tokenUrl || environment.baseUrl || Utilities.baseUrl();
         this.loginUrl = environment.loginUrl;
-        this.fallbackBaseUrl = 'https://quickapp.ebenmonney.com';
+        this.fallbackBaseUrl = '';
         // ***End of defaults***
         this._language = null;
         this._homeUrl = null;
@@ -362,11 +365,14 @@ var ConfigurationService = /** @class */ (function () {
         this._themeId = null;
     };
     /** @nocollapse */ ConfigurationService.ɵfac = function ConfigurationService_Factory(t) { return new (t || ConfigurationService)(ɵɵinject(LocalStoreManagerServiceAbstractProvider), ɵɵinject(TranslationServiceAbstractProvider), ɵɵinject(ThemeManagerAbstractProvider)); };
-    /** @nocollapse */ ConfigurationService.ɵprov = ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac });
+    /** @nocollapse */ ConfigurationService.ɵprov = ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac, providedIn: 'root' });
     return ConfigurationService;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(ConfigurationService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: LocalStoreManagerServiceAbstractProvider }, { type: TranslationServiceAbstractProvider }, { type: ThemeManagerAbstractProvider }]; }, null); })();
 
 var AppTranslationService = /** @class */ (function () {
@@ -425,13 +431,19 @@ var AppTranslationService = /** @class */ (function () {
         return this.translate.get(key, interpolateParams);
     };
     /** @nocollapse */ AppTranslationService.ɵfac = function AppTranslationService_Factory(t) { return new (t || AppTranslationService)(ɵɵinject(TranslateService)); };
-    /** @nocollapse */ AppTranslationService.ɵprov = ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac });
+    /** @nocollapse */ AppTranslationService.ɵprov = ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac, providedIn: 'root' });
     return AppTranslationService;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(AppTranslationService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: TranslateService }]; }, null); })();
 
+/**
+* Provides a wrapper for accessing the web storage API and synchronizing session storage across tabs/windows.
+*/
 var LocalStoreManager = /** @class */ (function () {
     function LocalStoreManager() {
         var _this = this;
@@ -715,14 +727,16 @@ var LocalStoreManager = /** @class */ (function () {
     LocalStoreManager.syncListenerInitialised = false;
     LocalStoreManager.DBKEY_SYNC_KEYS = 'sync_keys';
     /** @nocollapse */ LocalStoreManager.ɵfac = function LocalStoreManager_Factory(t) { return new (t || LocalStoreManager)(); };
-    /** @nocollapse */ LocalStoreManager.ɵprov = ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac });
+    /** @nocollapse */ LocalStoreManager.ɵprov = ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac, providedIn: 'root' });
     return LocalStoreManager;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(LocalStoreManager, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], null, null); })();
 
-// =============================
 var ThemeManager = /** @class */ (function () {
     function ThemeManager() {
         this.themes = [
@@ -870,24 +884,21 @@ var ThemeManager = /** @class */ (function () {
         return "style-manager-" + key;
     };
     /** @nocollapse */ ThemeManager.ɵfac = function ThemeManager_Factory(t) { return new (t || ThemeManager)(); };
-    /** @nocollapse */ ThemeManager.ɵprov = ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac });
+    /** @nocollapse */ ThemeManager.ɵprov = ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac, providedIn: 'root' });
     return ThemeManager;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(ThemeManager, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], null, null); })();
 
 var NgxAppkitServicesAlphaModule = /** @class */ (function () {
     function NgxAppkitServicesAlphaModule() {
     }
     /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵmod = ɵɵdefineNgModule({ type: NgxAppkitServicesAlphaModule });
-    /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [
-            AlertService,
-            ConfigurationService,
-            AppTranslationService,
-            LocalStoreManager,
-            ThemeManager
-        ], imports: [[]] });
+    /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [], imports: [[]] });
     return NgxAppkitServicesAlphaModule;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgxAppkitServicesAlphaModule, [{
@@ -896,13 +907,7 @@ var NgxAppkitServicesAlphaModule = /** @class */ (function () {
                 declarations: [],
                 imports: [],
                 exports: [],
-                providers: [
-                    AlertService,
-                    ConfigurationService,
-                    AppTranslationService,
-                    LocalStoreManager,
-                    ThemeManager
-                ]
+                providers: []
             }]
     }], null, null); })();
 

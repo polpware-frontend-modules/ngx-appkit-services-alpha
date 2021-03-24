@@ -1,4 +1,4 @@
-import { IConfigurationServiceContract, TranslationServiceAbstractProvider, LocalStoreManagerServiceAbstractProvider, ThemeManagerAbstractProvider } from '@polpware/ngx-appkit-contracts-alpha';
+import { IConfigurationServiceContract, LocalStoreManagerServiceAbstractProvider, ThemeManagerAbstractProvider, TranslationServiceAbstractProvider } from '@polpware/ngx-appkit-contracts-alpha';
 import * as i0 from "@angular/core";
 export declare class ConfigurationService implements IConfigurationServiceContract {
     private localStorage;

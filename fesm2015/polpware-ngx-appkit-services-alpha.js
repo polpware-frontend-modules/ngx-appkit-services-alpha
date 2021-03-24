@@ -1,10 +1,9 @@
-import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵinject, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule } from '@angular/core';
 import { HttpResponseBase } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵinject, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule } from '@angular/core';
 import { DialogType, MessageSeverity, Utilities, environment, DBkeys, ConfigurationServiceConstants, LocalStoreManagerServiceAbstractProvider, TranslationServiceAbstractProvider, ThemeManagerAbstractProvider, StorageManagerConstants } from '@polpware/ngx-appkit-contracts-alpha';
+import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
-// =============================
 class AlertService {
     constructor() {
         this.messages = new Subject();
@@ -122,9 +121,12 @@ class AlertService {
     }
 }
 /** @nocollapse */ AlertService.ɵfac = function AlertService_Factory(t) { return new (t || AlertService)(); };
-/** @nocollapse */ AlertService.ɵprov = ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac });
+/** @nocollapse */ AlertService.ɵprov = ɵɵdefineInjectable({ token: AlertService, factory: AlertService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(AlertService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], null, null); })();
 
 class ConfigurationService {
@@ -132,7 +134,7 @@ class ConfigurationService {
         this.baseUrl = environment.baseUrl || Utilities.baseUrl();
         this.tokenUrl = environment.tokenUrl || environment.baseUrl || Utilities.baseUrl();
         this.loginUrl = environment.loginUrl;
-        this.fallbackBaseUrl = 'https://quickapp.ebenmonney.com';
+        this.fallbackBaseUrl = '';
         // ***End of defaults***
         this._language = null;
         this._homeUrl = null;
@@ -307,9 +309,12 @@ class ConfigurationService {
     }
 }
 /** @nocollapse */ ConfigurationService.ɵfac = function ConfigurationService_Factory(t) { return new (t || ConfigurationService)(ɵɵinject(LocalStoreManagerServiceAbstractProvider), ɵɵinject(TranslationServiceAbstractProvider), ɵɵinject(ThemeManagerAbstractProvider)); };
-/** @nocollapse */ ConfigurationService.ɵprov = ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac });
+/** @nocollapse */ ConfigurationService.ɵprov = ɵɵdefineInjectable({ token: ConfigurationService, factory: ConfigurationService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(ConfigurationService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: LocalStoreManagerServiceAbstractProvider }, { type: TranslationServiceAbstractProvider }, { type: ThemeManagerAbstractProvider }]; }, null); })();
 
 class AppTranslationService {
@@ -368,9 +373,12 @@ class AppTranslationService {
     }
 }
 /** @nocollapse */ AppTranslationService.ɵfac = function AppTranslationService_Factory(t) { return new (t || AppTranslationService)(ɵɵinject(TranslateService)); };
-/** @nocollapse */ AppTranslationService.ɵprov = ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac });
+/** @nocollapse */ AppTranslationService.ɵprov = ɵɵdefineInjectable({ token: AppTranslationService, factory: AppTranslationService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(AppTranslationService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: TranslateService }]; }, null); })();
 
 /**
@@ -646,12 +654,14 @@ class LocalStoreManager {
 LocalStoreManager.syncListenerInitialised = false;
 LocalStoreManager.DBKEY_SYNC_KEYS = 'sync_keys';
 /** @nocollapse */ LocalStoreManager.ɵfac = function LocalStoreManager_Factory(t) { return new (t || LocalStoreManager)(); };
-/** @nocollapse */ LocalStoreManager.ɵprov = ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac });
+/** @nocollapse */ LocalStoreManager.ɵprov = ɵɵdefineInjectable({ token: LocalStoreManager, factory: LocalStoreManager.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(LocalStoreManager, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], null, null); })();
 
-// =============================
 class ThemeManager {
     constructor() {
         this.themes = [
@@ -800,34 +810,25 @@ class ThemeManager {
     }
 }
 /** @nocollapse */ ThemeManager.ɵfac = function ThemeManager_Factory(t) { return new (t || ThemeManager)(); };
-/** @nocollapse */ ThemeManager.ɵprov = ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac });
+/** @nocollapse */ ThemeManager.ɵprov = ɵɵdefineInjectable({ token: ThemeManager, factory: ThemeManager.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(ThemeManager, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], null, null); })();
 
 class NgxAppkitServicesAlphaModule {
 }
 /** @nocollapse */ NgxAppkitServicesAlphaModule.ɵmod = ɵɵdefineNgModule({ type: NgxAppkitServicesAlphaModule });
-/** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [
-        AlertService,
-        ConfigurationService,
-        AppTranslationService,
-        LocalStoreManager,
-        ThemeManager
-    ], imports: [[]] });
+/** @nocollapse */ NgxAppkitServicesAlphaModule.ɵinj = ɵɵdefineInjector({ factory: function NgxAppkitServicesAlphaModule_Factory(t) { return new (t || NgxAppkitServicesAlphaModule)(); }, providers: [], imports: [[]] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgxAppkitServicesAlphaModule, [{
         type: NgModule,
         args: [{
                 declarations: [],
                 imports: [],
                 exports: [],
-                providers: [
-                    AlertService,
-                    ConfigurationService,
-                    AppTranslationService,
-                    LocalStoreManager,
-                    ThemeManager
-                ]
+                providers: []
             }]
     }], null, null); })();
 
